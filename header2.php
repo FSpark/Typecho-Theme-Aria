@@ -64,7 +64,7 @@
     </div>
     </div>
 </div>
-<div id="search-box" class="animated" style="background: rgba(0, 0, 0, 0.5)">
+<div id="search-box" class="animated" style="background: #fff">
     <span class="close"><i class="iconfont icon-aria-close"></i></span>
     <form id="search" method="post" action="./" role="search">
         <input type="text" name="s" id="search-text" placeholder="想要看什么？" />
@@ -80,7 +80,7 @@
                             echo Utils::getThumbnail();
                     else
                         Utils::getBackground();
-                ?>) center center no-repeat;background-size: cover;z-index: -1;position: relative;box-shadow: 0 10px 30px 0 rgba(0,0,0,.4);}</style>
+                ?>) center center no-repeat;background-size: cover;z-index: -1;position: relative;}</style>
 <header id="header" class="clearfix animated fadeInDown">
     <div id="site-meta">
             <h1 id="site-name"><?php $this->options->title(); ?></h1>

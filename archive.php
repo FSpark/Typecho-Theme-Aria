@@ -27,7 +27,7 @@
     </div>    
     <div class="card-content article"> 
             <div class="card-title">
-                    <a href="<?php $this->permalink(); ?>"><?php $this->sticky();$this->title(); ?></a>
+                    <a href="<?php $this->permalink(); ?>"><?php $this->title(); ?></a>
                 </div>
                 <div class="card-meta-top">
                 <span class="card-meta-date"><i class="iconfont icon-aria-date"></i> <?php $this->date(); ?></span><span class="card-meta-cate"><i class="iconfont icon-aria-category"></i> <?php $this->category(' ',true,'无'); ?></span>

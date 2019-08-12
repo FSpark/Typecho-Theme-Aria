@@ -17,7 +17,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 <div id="main" class="col-mb-12 col-8 col-offset-2" >
 	<?php while($this->next()): ?>
             <article itemscope itemtype="http://schema.org/BlogPosting" class="card animated wow fadeIn" data-wow-duration="1s" data-wow-offset="10">
-            
+           <?php if (!$this->fields->noimg): ?> 
             <div class="card-image">
                 <a href="<?php $this->permalink(); ?>">
                     <?php if(Utils::isEnabled('enableLazyload','AriaConfig')): ?>
@@ -25,7 +25,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                                 $this->fields->thumbnail();
                             else
                                 echo Utils::getThumbnail();
-                        ?> style="background:url(<?php $this->options->themeUrl('assets/img/loading.svg') ?>) center center no-repeat;background-size: 100% auto;">
+                        ?> style="background:url(<?php $this->options->themeUrl('assets/img/koi.gif') ?>) center center no-repeat;background-size: 100% auto;">
                     </div>
                     <?php else: ?>
                     <div class="card-thumbnail" style="background:url(<?php if($this->fields->thumbnail)
@@ -37,8 +37,14 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                     <?php endif; ?>
                 </a>
             </div>
+
             <div class="card-content article">    
             <div class="card-title">
+            <?php else:?>
+            <div class="card-content article">    
+            <div class="card-title" style="margin-top:5px">
+
+            <?php endif;?>
                     <a href="<?php $this->permalink(); ?>"><?php $this->sticky();$this->title(); ?></a>
                 </div>
                 <div class="card-meta-top">
@@ -48,7 +54,7 @@ if (!defined('__TYPECHO_ROOT_DIR__')) exit;
                         if($this->fields->previewContent)
                             $this->fields->previewContent();
                         else
-                            $this->excerpt(50, '...');
+                            $this->excerpt(100, '...');
                     ?></div>
                 <div class="card-line"></div>
                 <ul class="card-meta-bottom">

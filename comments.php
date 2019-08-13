@@ -1,3 +1,4 @@
+
 <?php function threadedComments($comments, $singleCommentOptions) {
     $commentClass = '';
     if ($comments->authorId) {
@@ -87,11 +88,13 @@ echo $commentClass;
 				<a href="<?php $this->options->logoutUrl(); ?>" title="Logout" no-pjax>
 					<?php _e('退出'); ?>&raquo;</a>
 			</p>
-			<?php else: ?>
-			<div id="comment-info">
-				<p>
+            <?php else: ?>
+            <div id="comment-plane">
+                <div id="comment-header">
 					<img no-lazyload id="comment-avatar" src="<?php echo __TYPECHO_GRAVATAR_PREFIX__ ?>">
-				</p>
+    </div>
+			<div id="comment-info">
+				
 				<p class="comment-input">
 					<label for="author" class="required">
 						<i class="iconfont icon-aria-username"></i>
@@ -114,8 +117,12 @@ echo $commentClass;
 					 value="<?php $this->remember('url'); ?>" <?php
 					 if ($this->options->commentsRequireURL): ?> required
 					<?php endif; ?>/>
-				</p>
-			</div>
+                </p>
+                <p class="comment-input">
+                    <?php spam_protection_math();?> 
+    </p> 
+            </div>
+    </div>
 			<?php endif; ?>
 			<?php if($this->options->commentsMarkdown): ?>
 				<div style="float:right">

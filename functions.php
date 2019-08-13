@@ -142,12 +142,13 @@ Typecho_Plugin::factory('Widget_Abstract_Comments')->contentEx = array('Comments
 
 function themeInit($archive)
 {
+    $comment = spam_protection_pre($comment);
     Helper::options()->commentsMaxNestingLevels = 999;
     Helper::options()->commentsOrder = 'DESC';
     if (Utils::isEnabled('enablePjax', 'AriaConfig')) {
         Helper::options()->commentsAntiSpam = false;
     }
-
+    
     //ajax获取评论头像
     if (isset($_GET['action']) == 'ajax_avatar_get' && 'GET' == $_SERVER['REQUEST_METHOD']) {
         $host = __TYPECHO_GRAVATAR_PREFIX__;
@@ -157,4 +158,29 @@ function themeInit($archive)
         echo $avatar;
         die();
     } else {return;}
+}
+//算术验证评论
+function spam_protection_math(){
+    $num1=rand(1,20);
+    $num2=rand(1,20);
+    echo "<label for=\"sum\">\n";
+    echo "<i class=\"iconfont icon-aria-checked\"></i>\n";
+    echo "</label>\n";
+    echo "<input type=\"text\" name=\"sum\" id=\"sum\" class=\"text\" placeholder=\" $num1 + $num2 = ?\" value=\"\">\n";
+    echo "<input type=\"hidden\" name=\"num1\" value=\"$num1\">\n";
+    echo "<input type=\"hidden\" name=\"num2\" value=\"$num2\">";
+}
+function spam_protection_pre($comment){
+    
+    $sum=$_POST['sum'];
+    switch($sum){
+        case $_POST['num1']+$_POST['num2']:
+        break;
+        case null:
+        throw new Typecho_Widget_Exception(_t('对不起: 请输入验证码。<a href="javascript:history.back(-1)">返回上一页</a>','评论失败'));
+        break;
+        default:
+        throw new Typecho_Widget_Exception(_t('对不起: 验证码错误，请<a href="javascript:history.back(-1)">返回</a>重试。','评论失败'));
+    }
+    return $comment;
 }
